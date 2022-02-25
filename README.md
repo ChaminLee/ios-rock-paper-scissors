@@ -1,13 +1,19 @@
-## 👊🏻 묵찌빠 프로젝트
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&width=100%&height=300&section=header&text=👊🏻%20묵찌빠&fontSize=90" width=100%>
 
-프로젝트 기간: 2021.10.11 ~ 2021.10.15
+
+# 👊🏻 묵찌빠 프로젝트
+
+- 팀 프로젝트 (2인)
+- 프로젝트 기간: 2021.10.11 ~ 2021.10.15
 
 ## 목차
 - [Flow Chart](#flow-chart)
 - [코딩 컨벤션](#코딩-컨벤션)
 - [커밋 컨벤션](#커밋-컨벤션)
-- [STEP 1: 고민되었던 점 & 해결방안](#step-1)
-- [STEP 2: 고민되었던 점 & 해결방안](#step-2)
+- [STEP 1](#STEP1)
+    - [고민되었던 점 & 해결방안](#STEP1_1)   
+- [STEP 2](#STEP2)
+    - [고민되었던 점 & 해결방안](#STEP2_1)    
 
 ## Flow Chart
 
@@ -38,11 +44,16 @@
 - body는 72자마다 줄 바꾸기
 - body는 어떻게 보다 무엇을, 왜 에 맞춰 작성하기
 
-## STEP 1
+---
+<a name="STEP1"></a>
 
-### 고민되었던 점 및 해결방법
+# 🤔 STEP 1
 
-#### - Sign vs SignFactory
+<a name="STEP1_1"></a>
+
+## 🔥 고민되었던 점 및 해결방법
+
+### 1️⃣ Sign vs SignFactory
 
 Sign 타입 내에서 기존에 Sign을 생성하는 타입 메서드를 구현하였으나, SignFactory라는 Sign을 생성, 관리하는 새로운 타입을 만들어야하나 고민이 있었습니다. 
 
@@ -50,7 +61,7 @@ Sign 타입 내에서 기존에 Sign을 생성하는 타입 메서드를 구현�
 >
 > Sign 타입에는 중요한 특성만을 가지도록 만들어주기 위해 추가적인 기능은 붙이지 않았고, Sign 타입을 활용하여 생성, 관리하는 메서드는 SignFactory라는 타입을 새로 만들어 해당 타입 내에 구현해주었습니다. 
 
-#### - Switch vs If
+### 2️⃣ Switch vs If
 
 switch와 If 사이에서 가독성의 관점에서 어느 것이 더 좋은 방법인지 고민해봤습니다. 
 
@@ -89,7 +100,7 @@ func checkWinner(userSign: Sign, computerSign: Sign) -> GameResult {
 > 코드를 간결하게 만드는 것과 의미를 명확하게 하고자 하는 방법 사이에서 적절한 방식을 선택했습니다.
 
 
-#### - Recursive vs Iterative
+### 3️⃣ Recursive vs Iterative
 
 게임을 실행하기 위한 playGame을 구현할 때 recursively하게 구현할 지, iteratively하게 구현할 지에 대해 고민했습니다. 
 
@@ -151,7 +162,7 @@ func playGame() {
 >
 > 더 간결하고 문제의 제약 사항을 지키기에 적합한 방법이라고 생각되었습니다. 하지만 반복문에 비해 덜 직관적이라는 부분은 있는 것 같습니다. 
 
-#### - Enumerations 활용 
+### 4️⃣ Enumerations 활용 
 
 - `Validity`
   : invalid한 경우에는 유효하지 않다는 결과만 출력하도록 하고, valid한 경우 유효하다는 정보와 유효한 입력을 함께 반환하도록 했습니다. 
@@ -162,20 +173,24 @@ func playGame() {
   - `Self` : 타입 이름을 반복적으로 사용하지 않게 도와주는 역할을 합니다. 타입 프로퍼티/메서드를 호출할 때 앞에 `Self`를 붙여 사용합니다.
   - `self` : 모든 인스턴스들이 암시적으로 생성하는 프로퍼티를 의미하며, 인스턴스 프로퍼티/메서드를 호출할 때 `self`를 붙여 사용합니다.
 
-#### - 네이밍 
+### 5️⃣ 네이밍 
 
 함수, 타입, 매개변수의 이름에 역할이 명확하게 표현되도록 고민하여 네이밍했습니다.
 
-#### - Optional
+### 6️⃣ Optional
 
 - `generateRandomElement` 메서드 내에서 사용되는 `randomElement` 메서드는 대상 배열이 비어있을 경우 nil을 반환할 수 있습니다. 하지만 `Sign.allCases`에서는 빈 배열이 반환되는 경우가 없으나, 혹시나 nil이 반환되는 faltalError를 사용하여 고의로 오류를 발생시켜 논리적 오류를 재확인하도록 하였습니다.
 - optional을 처리해줄 때, 빠른 종료의 장점을 갖는 `guard let` 구문을 사용했었습니다.
 
-## STEP 2
+<a name="STEP2"></a>
 
-### 고민되었던 점 및 해결방법
+# 🤔 STEP 2
 
-#### - randomElement
+<a name="STEP2_1"></a>
+
+## 🔥 고민되었던 점 및 해결방법
+
+### 1️⃣ randomElement
 
 프로그램을 실행하였을 때 무승부가 연속으로 약 4~5회 나오는 상황을 여러 번 마주쳤습니다. 매우 낮은 확률의 상황이 자주 발생하여 작성한 코드에서 랜덤값을 불러오는 부분에 구현이 잘못된 게 없는지 고민했습니다. randomElement 메소드가 항상 랜덤한 값을 반환하는지 확인이 필요했습니다.
 
@@ -192,7 +207,7 @@ public func randomElement<T: RandomNumberGenerator>(
   }
 ```
 
-#### - Protocol
+### 2️⃣ Protocol
 
 - Equatable
 
@@ -208,7 +223,7 @@ public func randomElement<T: RandomNumberGenerator>(
 
   > 해결 방법:  재사용성을 높이기 위해 Player 타입을 추가해주었고, 추가 과정에서 RawValue를 사용하지 않고 문구를 출력하기 위해 Player 타입에 CustomStringConvertible을 채택하였습니다.
 
-#### - 함수 재사용 및 기존 코드 확장성 증대
+### 3️⃣ 함수 재사용 및 기존 코드 확장성 증대
 
 - 새로운 타입 추가
 
